@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Datebase,sql优化," />
+  <meta name="keywords" content="Datebase,sql优化,just do IT," />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/05/17/SQL优化之SQL执行顺序/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
 <meta property="og:description" content="数据库优化都不会！算什么前端！">
-<meta property="og:updated_time" content="2016-05-18T13:08:26.039Z">
+<meta property="og:updated_time" content="2016-05-18T13:32:06.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL优化之SQL执行顺序">
 <meta name="twitter:description" content="数据库优化都不会！算什么前端！">
@@ -174,32 +174,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             目录
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/git" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -331,8 +311,9 @@
 <p>—-横向来看—-</p>
 <p>　　(1) 不要写 SELECT * 的语句，而是选择你需要的字段。</p>
 <p>　　(2) 当在 SQL 语句中连接多个表时, 请使用表的别名并把别名前缀于每个 Column 上。这样一来,就可以减少解析的时间并减少那些由 Column 歧义引起的语法错误。 </p>
-<p>　　<br>　　如有表 table1(ID,col1) 和 table2(ID,col2)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">　　Select A.ID, A.col1, B.col2</span><br><span class="line">　　-- Select A.ID, col1, col2 –不要这么写，不利于将来程序扩展</span><br><span class="line"></span><br><span class="line">　　from table1 A inner join table2 B on A.ID=B.ID Where …</span><br></pre></td></tr></table></figure></p>
-<p>—-纵向来看—-</p>
+<p>　　<br>　　如有表 table1(ID,col1) 和 table2(ID,col2)<br><blockquote><p>　　Select A.ID, A.col1, B.col2<br>　　– Select A.ID, col1, col2 –不要这么写，不利于将来程序扩展</p>
+<p>　　from table1 A inner join table2 B on A.ID=B.ID Where … </p>
+</blockquote><br>—-纵向来看—-</p>
 <p>(1)合理写 WHERE 子句，不要写没有 WHERE 的 SQL 语句。</p>
 <p>(2) SELECT TOP N * –没有 WHERE 条件的用此替代</p>
 <h3 id="尽量少做重复的工作"><a href="#尽量少做重复的工作" class="headerlink" title="尽量少做重复的工作"></a>尽量少做重复的工作</h3><p>A、控制同一语句的多次执行，特别是一些基础数据的多次执行是很多程序员很少注意的。</p>
@@ -353,47 +334,67 @@
 <p>所以我的建议是，在并发系统中，尽量使用 CREATE TABLE + INSERT INTO，而大数据量的单个语句使用中，使用 SELECT INTO。</p>
 <h3 id="注意子查询的用法"><a href="#注意子查询的用法" class="headerlink" title="注意子查询的用法"></a>注意子查询的用法</h3><p>子查询是一个 SELECT 查询，它嵌套在 SELECT、INSERT、UPDATE、DELETE 语句或其它子查询中。<br>任何允许使用表达式的地方都可以使用子查询，子查询可以使我们的编程灵活多样，可以用来实现一些特殊的功能。但是在性能上，往往一个不合适的子查询用法会形成一个性能瓶颈。如果子查询的条件中使用了其外层的表的字段，这种子查询就叫作相关子查询。</p>
 <p>相关子查询可以用IN、NOT IN、EXISTS、NOT EXISTS引入。 关于相关子查询，应该注意：</p>
-<p>A、NOT IN、NOT EXISTS 的相关子查询可以改用 LEFT JOIN 代替写法。比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID NOT IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)</span><br></pre></td></tr></table></figure></p>
-<p>可以改写成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT A.PUB_NAME FROM PUBLISHERS A LEFT JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID WHERE B.PUB_ID IS NULL</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT TITLE FROM TITLES WHERE NOT EXISTS (SELECT TITLE_ID FROM SALES WHERE TITLE_ID = TITLES.TITLE_ID)</span><br></pre></td></tr></table></figure>
-<p>可以改写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT TITLE FROM TITLES LEFT JOIN SALES ON SALES.TITLE_ID = TITLES.TITLE_ID WHERE SALES.TITLE_ID IS NULL</span><br><span class="line">``` </span><br><span class="line">B、 如果保证子查询没有重复 ，IN、EXISTS 的相关子查询可以用 INNER JOIN 代替。比如：</span><br><span class="line">```bash</span><br><span class="line">SELECT PUB_NAMEFROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)</span><br></pre></td></tr></table></figure></p>
-<p>可以改写成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT A.PUB_NAME –SELECT DISTINCT A.PUB_NAME FROM PUBLISHERS A INNER JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID</span><br></pre></td></tr></table></figure></p>
-<p>C、 IN 的相关子查询用 EXISTS 代替，比如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)</span><br></pre></td></tr></table></figure></p>
-<p>可以用下面语句代替：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT PUB_NAME FROM PUBLISHERS WHERE EXISTS(SELECT 1 FROM TITLES WHERE TYPE = ‘BUSINESS’ AND PUB_ID= PUBLISHERS.PUB_ID)</span><br></pre></td></tr></table></figure></p>
-<p>D、 不要用 COUNT(*) 的子查询判断是否存在记录，最好用 LEFT JOIN 或者 EXISTS ，比如有人写这样的语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)=0</span><br></pre></td></tr></table></figure></p>
-<p>应该改成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT JOBS.JOB_DESC FROM JOBS LEFT JOIN EMPLOYEE ON EMPLOYEE.JOB_ID=JOBS.JOB_ID WHERE EMPLOYEE.EMP_ID IS NULL</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)&lt;&gt;0</span><br></pre></td></tr></table></figure>
-<p>应该改成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT JOB_DESC FROM JOBS WHERE EXISTS (SELECT 1 FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)</span><br></pre></td></tr></table></figure></p>
+<p>A、NOT IN、NOT EXISTS 的相关子查询可以改用 LEFT JOIN 代替写法。比如：<br><blockquote><p>SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID NOT IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’) </p>
+</blockquote><br>可以改写成：<br><blockquote><p>SELECT A.PUB_NAME FROM PUBLISHERS A LEFT JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID WHERE B.PUB_ID IS NULL</p>
+</blockquote></p>
+<blockquote><p>SELECT TITLE FROM TITLES WHERE NOT EXISTS (SELECT TITLE_ID FROM SALES WHERE TITLE_ID = TITLES.TITLE_ID)</p>
+</blockquote>
+<p>可以改写成：<br><blockquote><p>SELECT TITLE FROM TITLES LEFT JOIN SALES ON SALES.TITLE_ID = TITLES.TITLE_ID WHERE SALES.TITLE_ID IS NULL</p>
+</blockquote><br>B、 如果保证子查询没有重复 ，IN、EXISTS 的相关子查询可以用 INNER JOIN 代替。比如：<br><blockquote><p>SELECT PUB_NAMEFROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)</p>
+</blockquote><br>可以改写成：<br><blockquote><p>SELECT A.PUB_NAME –SELECT DISTINCT A.PUB_NAME FROM PUBLISHERS A INNER JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID</p>
+</blockquote><br>C、 IN 的相关子查询用 EXISTS 代替，比如<br><blockquote><p>SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)</p>
+</blockquote><br>可以用下面语句代替：<br><blockquote><p>SELECT PUB_NAME FROM PUBLISHERS WHERE EXISTS(SELECT 1 FROM TITLES WHERE TYPE = ‘BUSINESS’ AND PUB_ID= PUBLISHERS.PUB_ID) </p>
+</blockquote><br>D、 不要用 COUNT(*) 的子查询判断是否存在记录，最好用 LEFT JOIN 或者 EXISTS ，比如有人写这样的语句：<br><blockquote><p>SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)=0</p>
+</blockquote><br>应该改成：<br><blockquote><p>SELECT JOBS.JOB_DESC FROM JOBS LEFT JOIN EMPLOYEE ON EMPLOYEE.JOB_ID=JOBS.JOB_ID WHERE EMPLOYEE.EMP_ID IS NULL</p>
+</blockquote></p>
+<blockquote><p>SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)&lt;&gt;0</p>
+</blockquote>
+<p>应该改成：<br><blockquote><p>SELECT JOB_DESC FROM JOBS WHERE EXISTS (SELECT 1 FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)</p>
+</blockquote></p>
 <p>###尽量使用索引</p>
 <p>建立索引后，并不是每个查询都会使用索引，在使用索引的情况下，索引的使用效率也会有很大的差别。只要我们在查询语句中没有强制指定索引，索引的选择和使用方法是SQLSERVER的优化器自动作的选择，而它选择的根据是查询语句的条件以及相关表的统计信息，这就要求我们在写SQL语句的时候尽量使得优化器可以使用索引。为了使得优化器能高效使用索引，写语句的时候应该注意：</p>
-<p>A、不要对索引字段进行运算，而要想办法做变换，比如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ID FROM T WHERE NUM/2=100</span><br></pre></td></tr></table></figure></p>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ID FROM T WHERE NUM=100*2</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ID FROM T WHERE NUM/2=NUM1</span><br></pre></td></tr></table></figure>
-<p>如果NUM有索引应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ID FROM T WHERE NUM=NUM1*2</span><br></pre></td></tr></table></figure></p>
-<p>如果NUM1有索引则不应该改。</p>
-<p>发现过这样的语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 年,月,金额 FROM 结余表  WHERE 100*年+月=2010*100+10</span><br></pre></td></tr></table></figure></p>
-<p>应该改为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 年,月,金额 FROM 结余表 WHERE 年=2010 AND月=10</span><br></pre></td></tr></table></figure></p>
-<p>B、 不要对索引字段进行格式转换</p>
-<p>日期字段的例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE CONVERT(VARCHAR(10), 日期字段,120)=’2010-07-15′</span><br></pre></td></tr></table></figure></p>
-<p>应该改为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE日期字段〉=’2010-07-15′   AND   日期字段&lt;‘2010-07-16′</span><br></pre></td></tr></table></figure></p>
+<p>A、不要对索引字段进行运算，而要想办法做变换，比如<br><blockquote><p>SELECT ID FROM T WHERE NUM/2=100</p>
+</blockquote><br>应改为:<br><blockquote><p>SELECT ID FROM T WHERE NUM=100*2</p>
+</blockquote></p>
+<blockquote><p>SELECT ID FROM T WHERE NUM/2=NUM1</p>
+</blockquote>
+<p>如果NUM有索引应改为:<br><blockquote><p>SELECT ID FROM T WHERE NUM=NUM1*2</p>
+</blockquote><br>如果NUM1有索引则不应该改。</p>
+<p>发现过这样的语句：<br><blockquote><p>SELECT 年,月,金额 FROM 结余表  WHERE 100<em>年+月=2010</em>100+10</p>
+</blockquote><br>应该改为：<br><blockquote><p>SELECT 年,月,金额 FROM 结余表 WHERE 年=2010 AND月=10</p>
+</blockquote><br>B、 不要对索引字段进行格式转换</p>
+<p>日期字段的例子：<br><blockquote><p>WHERE CONVERT(VARCHAR(10), 日期字段,120)=’2010-07-15′</p>
+</blockquote><br>应该改为<br><blockquote><p>WHERE日期字段〉=’2010-07-15′   AND   日期字段&lt;‘2010-07-16′</p>
+</blockquote></p>
 <p>ISNULL 转换的例子：</p>
 <p>WHERE ISNULL(字段,”)&lt;&gt;”应改为:WHERE字段&lt;&gt;”<br>WHERE ISNULL(字段,”)=”不应修改<br>WHERE ISNULL(字段,’F’) =’T’应改为: WHERE字段=’T’<br>WHERE ISNULL(字段,’F’)&lt;&gt;’T’不应修改</p>
-<p>C、 不要对索引字段使用函数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE LEFT(NAME, 3)=’ABC’ 或者WHERE SUBSTRING(NAME,1, 3)=’ABC’</span><br></pre></td></tr></table></figure></p>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE NAME LIKE ‘ABC%’</span><br></pre></td></tr></table></figure></p>
-<p>日期查询的例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE DATEDIFF(DAY, 日期,’2010-06-30′)=0</span><br></pre></td></tr></table></figure></p>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE 日期&gt;=’2010-06-30′ AND 日期 &lt;‘2010-07-01′</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;0</span><br></pre></td></tr></table></figure>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE 日期 &lt;‘2010-06-30′</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;=0</span><br></pre></td></tr></table></figure>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE 日期 &lt;‘2010-07-01′</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE DATEDIFF(DAY, 日期,’2010-06-30′)&lt;0</span><br></pre></td></tr></table></figure>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE 日期&gt;=’2010-07-01′</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE DATEDIFF(DAY, 日期,’2010-06-30′)&lt;=0</span><br></pre></td></tr></table></figure>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE 日期&gt;=’2010-06-30</span><br></pre></td></tr></table></figure></p>
+<p>C、 不要对索引字段使用函数<br><blockquote><p>WHERE LEFT(NAME, 3)=’ABC’ 或者WHERE SUBSTRING(NAME,1, 3)=’ABC’</p>
+</blockquote><br>应改为:<br><blockquote><p>WHERE NAME LIKE ‘ABC%’</p>
+</blockquote><br>日期查询的例子：<br><blockquote><p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)=0</p>
+</blockquote><br>应改为:<br><blockquote><p>WHERE 日期&gt;=’2010-06-30′ AND 日期 &lt;‘2010-07-01′</p>
+</blockquote></p>
+<blockquote><p>WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;0</p>
+</blockquote>
+<p>应改为:<br><blockquote><p>WHERE 日期 &lt;‘2010-06-30′</p>
+</blockquote></p>
+<blockquote><p>WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;=0</p>
+</blockquote>
+<p>应改为:<br><blockquote><p>WHERE 日期 &lt;‘2010-07-01′</p>
+</blockquote></p>
+<blockquote><p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)&lt;0</p>
+</blockquote>
+<p>应改为:<br><blockquote><p>WHERE 日期&gt;=’2010-07-01′</p>
+</blockquote></p>
+<blockquote><p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)&lt;=0</p>
+</blockquote>
+<p>应改为:<br><blockquote><p>WHERE 日期&gt;=’2010-06-30</p>
+</blockquote></p>
 <p>D、不要对索引字段进行多字段连接</p>
 <p>比如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE FAME+ ‘. ‘+LNAME=’HAIWEI.YANG’</span><br></pre></td></tr></table></figure>
-<p>应改为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WHERE FNAME=’HAIWEI’ AND LNAME=’YANG’</span><br></pre></td></tr></table></figure></p>
+<blockquote><p>WHERE FAME+ ‘. ‘+LNAME=’HAIWEI.YANG’</p>
+</blockquote>
+<p>应改为:<br><blockquote><p>WHERE FNAME=’HAIWEI’ AND LNAME=’YANG’</p>
+</blockquote></p>
 <p>八：多表连接的连接条件对索引的选择有着重要的意义，所以我们在写连接条件条件的时候需要特别注意。</p>
 <p>A、多表连接的时候，连接条件必须写全，宁可重复，不要缺漏。</p>
 <p>B、连接条件尽量使用聚集索引</p>
@@ -427,6 +428,8 @@
             <a href="/tags/Datebase/" rel="tag">#Datebase</a>
           
             <a href="/tags/sql优化/" rel="tag">#sql优化</a>
+          
+            <a href="/tags/just-do-IT/" rel="tag">#just do IT</a>
           
         </div>
       
@@ -513,7 +516,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -522,10 +525,10 @@
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags/git">
+              
                 <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
-              </a>
+              
             </div>
           
 

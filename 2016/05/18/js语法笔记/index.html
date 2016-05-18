@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="just do IT,前端,正则," />
+  <meta name="keywords" content="just do IT,前端," />
 
 
 
@@ -84,25 +84,25 @@
 
 
 
-<meta name="description" content="连自己心爱的人都救不了,我还算什么厨师!
-佚名中华小当家
-字符串必须包含大小写和数字，长度在8-10位之间1^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).&amp;#123;8,10&amp;#125;$
-字符串仅能为中文1^[\\u4e00-\\u9fa5]&amp;#123;0,&amp;#125;$">
+<meta name="description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
+
+Boolean1!!&apos;foo&apos;
+通过两个取反，可以强制转换为Boolean类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正则表达式">
-<meta property="og:url" content="http://yoursite.com/2016/05/18/正则表达式/index.html">
+<meta property="og:title" content="js语法笔记">
+<meta property="og:url" content="http://yoursite.com/2016/05/18/js语法笔记/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
-<meta property="og:description" content="连自己心爱的人都救不了,我还算什么厨师!
-佚名中华小当家
-字符串必须包含大小写和数字，长度在8-10位之间1^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).&amp;#123;8,10&amp;#125;$
-字符串仅能为中文1^[\\u4e00-\\u9fa5]&amp;#123;0,&amp;#125;$">
-<meta property="og:updated_time" content="2016-05-18T13:29:37.013Z">
+<meta property="og:description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
+
+Boolean1!!&apos;foo&apos;
+通过两个取反，可以强制转换为Boolean类型">
+<meta property="og:updated_time" content="2016-05-18T13:37:08.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则表达式">
-<meta name="twitter:description" content="连自己心爱的人都救不了,我还算什么厨师!
-佚名中华小当家
-字符串必须包含大小写和数字，长度在8-10位之间1^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).&amp;#123;8,10&amp;#125;$
-字符串仅能为中文1^[\\u4e00-\\u9fa5]&amp;#123;0,&amp;#125;$">
+<meta name="twitter:title" content="js语法笔记">
+<meta name="twitter:description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
+
+Boolean1!!&apos;foo&apos;
+通过两个取反，可以强制转换为Boolean类型">
 
 
 
@@ -120,7 +120,7 @@
   };
 </script>
 
-  <title> 正则表达式 | Bloom's Blog </title>
+  <title> js语法笔记 | Bloom's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +230,7 @@
             
             
               
-                正则表达式
+                js语法笔记
               
             
           </h1>
@@ -242,7 +242,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-18T20:32:07+08:00" content="2016-05-18">
+            <time itemprop="dateCreated" datetime="2016-05-18T21:31:05+08:00" content="2016-05-18">
               2016-05-18
             </time>
           </span>
@@ -270,19 +270,21 @@
       
 
       
-        <blockquote><p>连自己心爱的人都救不了,我还算什么厨师!</p>
-<footer><strong>佚名</strong><cite>中华小当家</cite></footer></blockquote>
-<p>字符串必须包含大小写和数字，长度在8-10位之间<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$</span><br></pre></td></tr></table></figure></p>
-<p>字符串仅能为中文<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\\u4e00-\\u9fa5]&#123;0,&#125;$</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>由数字字母或下滑线组成的字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\\w+$</span><br></pre></td></tr></table></figure></p>
-<p>检查 Email 合法性<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[\\w!<span class="comment">#$%&amp;'*+/=?^_`&#123;|&#125;~-]+(?:\\.[\\w!#$%&amp;'*+/=?^_`&#123;|&#125;~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?</span></span><br></pre></td></tr></table></figure></p>
-<p>检查15位身份证号码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[1-9]\\d&#123;7&#125;((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d&#123;3&#125;$</span><br></pre></td></tr></table></figure></p>
-<p>检查18位身份证号码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[1-9]\\d&#123;5&#125;[1-9]\\d&#123;3&#125;((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d&#123;3&#125;([0-9]|X)$</span><br></pre></td></tr></table></figure></p>
-<p>格式日期校验（考虑到平年闰年）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(?:(?!0000)[0-9]&#123;4&#125;-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]&#123;2&#125;(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$  yyyy-mm-dd</span><br></pre></td></tr></table></figure></p>
-<p>金额校验，小数点后两位<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[0-9]+(.[0-9]&#123;2&#125;)?$</span><br></pre></td></tr></table></figure></p>
-<p>校验 IP-v4 地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b</span><br></pre></td></tr></table></figure></p>
-<p>校验 IP-v6 地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;7,7&#125;[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,7&#125;:|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,6&#125;:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,5&#125;(:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,2&#125;|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,4&#125;(:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,3&#125;|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,3&#125;(:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,4&#125;|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,2&#125;(:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,5&#125;|[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:((:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,6&#125;)|:((:[0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;)&#123;1,7&#125;|:)|fe80:(:[0-9a<span class="_">-f</span>A-F]&#123;0,4&#125;)&#123;0,4&#125;%[0-9a-zA-Z]&#123;1,&#125;|::(ffff(:0&#123;1,4&#125;)&#123;0,1&#125;:)&#123;0,1&#125;((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])|([0-9a<span class="_">-f</span>A-F]&#123;1,4&#125;:)&#123;1,4&#125;:((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9]))</span><br></pre></td></tr></table></figure></p>
+        <blockquote><p>别人看不懂的代码，才是最牛逼的代码!(哎<code>哎</code>别打我)</p>
+</blockquote>
+<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!<span class="string">'foo'</span></span><br></pre></td></tr></table></figure>
+<p>通过两个取反，可以强制转换为Boolean类型<br><a id="more"></a></p>
+<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+<span class="string">'45'</span></span><br><span class="line">+<span class="keyword">new</span> Date</span><br></pre></td></tr></table></figure>
+<p>String转化为Number    </p>
+<h2 id="Closure闭包"><a href="#Closure闭包" class="headerlink" title="Closure闭包"></a>Closure闭包</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var isType = function(type) &#123;</span><br><span class="line">    <span class="keyword">return</span> function(obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> toString.call(obj) == <span class="string">'[Object '</span> + type + <span class="string">']'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过高阶函数很轻松的实现判定类别</p>
+<h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var foo = document.querySelector(<span class="string">'.foo'</span>)</span><br><span class="line">foo.addEventListener(<span class="string">'click'</span>, (function() &#123;</span><br><span class="line">    var times = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> function() &#123;</span><br><span class="line">        times++</span><br><span class="line">        console.log(times)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(), <span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<p>通过创建一个闭包，把times封装到里面，然后返回函数。</p>
+<h2 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt"></a>parseInt</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~~<span class="number">3.14159</span></span><br><span class="line"><span class="comment">// =&gt; 3</span></span><br><span class="line">~~<span class="number">5.678</span></span><br><span class="line"><span class="comment">// =&gt; 5</span></span><br></pre></td></tr></table></figure>
+<p>~是一个叫做按位非的操作，会返回数值的反码。是二进制操作。JavaScript中的number都是double类型的，在位操作的时候要转化成int，两次~就还是原数。</p>
+<h2 id="Hex"><a href="#Hex" class="headerlink" title="Hex"></a>Hex</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(~~(Math.random()*(<span class="number">1</span>&lt;&lt;<span class="number">24</span>))).toString(<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<p>十六进制操作。其实就是一个Array.prototype.toString(16)的用法<br>1&lt;&lt;24的操作。是1左移24位。000000000000000000000001左移24位，变成了1000000000000000000000000</p>
+<p>References:<br><a href="https://www.sdk.cn/news/3025" target="_blank" rel="external">https://www.sdk.cn/news/3025</a><br>《深入浅出Node.js》<br>《JavaScript高级程序设计》<br>《JavaScript设计模式与开发实践》</p>
 
       
     </div>
@@ -308,8 +310,6 @@
           
             <a href="/tags/前端/" rel="tag">#前端</a>
           
-            <a href="/tags/正则/" rel="tag">#正则</a>
-          
         </div>
       
 
@@ -317,17 +317,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/17/SQL优化之SQL执行顺序/" rel="next" title="SQL优化之SQL执行顺序">
-                <i class="fa fa-chevron-left"></i> SQL优化之SQL执行顺序
+              <a href="/2016/05/18/正则表达式/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/js语法笔记/" rel="prev" title="js语法笔记">
-                js语法笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -434,7 +430,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean"><span class="nav-number">1.</span> <span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number"><span class="nav-number">2.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Closure闭包"><span class="nav-number">3.</span> <span class="nav-text">Closure闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event"><span class="nav-number">4.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parseInt"><span class="nav-number">5.</span> <span class="nav-text">parseInt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hex"><span class="nav-number">6.</span> <span class="nav-text">Hex</span></a></li></ol></div>
             
           </div>
         </section>
