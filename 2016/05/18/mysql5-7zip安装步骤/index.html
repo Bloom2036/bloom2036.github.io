@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Bloom's Blog">
 <meta property="og:description" content="1//如果这些代码有用，那它们是 Paul DiLascia 写的，如果没用，那我就不知道是谁写的了。
 1，解压文件 ， 新建my.ini文件文件内容">
-<meta property="og:updated_time" content="2016-05-18T14:39:13.668Z">
+<meta property="og:updated_time" content="2016-05-18T14:54:44.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql5.7zip安装步骤">
 <meta name="twitter:description" content="1//如果这些代码有用，那它们是 Paul DiLascia 写的，如果没用，那我就不知道是谁写的了。
@@ -276,13 +276,18 @@
       
         <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果这些代码有用，那它们是 Paul DiLascia 写的，如果没用，那我就不知道是谁写的了。</span></span><br></pre></td></tr></table></figure>
 <p>1，解压文件 ， 新建my.ini文件<br>文件内容<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">basedir=D:/greensoft/mysql</span><br><span class="line">datadir=D:/greensoft/mysql/data</span><br><span class="line">tmpdir=D:/greensoft/mysql/data</span><br><span class="line">port = 3306</span><br></pre></td></tr></table></figure></p>
-<p>2，管理员身份运行 cmd ， 切换到 mysql/bin 目录运行 mysqld install 命令创建服务</p>
-<p>3，运行 mysqld–initialize 命令初始化 data 文件</p>
-<p>4，启动服务 net start mysql</p>
+<p>2，管理员身份运行 cmd ， 切换到 mysql/bin 目录运行<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql/bin$ mysqld install</span><br></pre></td></tr></table></figure></p>
+<p>命令创建服务</p>
+<p>3，运行<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql/bin$ mysqld--initialize</span><br></pre></td></tr></table></figure></p>
+<p>命令初始化 data 文件</p>
+<p>4，启动服务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql/bin$ net start mysql</span><br></pre></td></tr></table></figure></p>
 <p>5，目前无法登陆，打开 my.ini 文件，添加 skip-grant-tables 保存并重启服务</p>
-<p>6，bin目录下输入 mysql -uroot -p 登陆，默认 root 没有密码</p>
-<p>7，修改 root 密码，use mysql 切换数据库，update user set authentication_string=PASSWORD(‘admin’) where user=’root’; 修改 root 密码为 admin </p>
-<p>8，停止服务 net stop mysql ， 打开 my.ini 文件， 注释掉 #skip-grant-tables</p>
+<p>6，bin目录下输入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql/bin$ mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p>登陆，默认 root 没有密码</p>
+<p>7，修改 root 密码，use mysql 切换数据库，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; update user set authentication_string=PASSWORD(<span class="string">'admin'</span>) where user=<span class="string">'root'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>修改 root 密码为 admin </p>
+<p>8，停止服务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql/bin$ net stop mysql</span><br></pre></td></tr></table></figure></p>
+<p>打开 my.ini 文件， 注释掉 #skip-grant-tables</p>
 <p>9，重新启动服务 net start mysql ， mysql -uroot -p 重新登陆</p>
 
       
