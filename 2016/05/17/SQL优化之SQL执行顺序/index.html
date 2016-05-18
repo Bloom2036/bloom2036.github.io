@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Datebase," />
+  <meta name="keywords" content="Datebase,sql优化," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="我听信了 Just do IT , 所以我现在成了程序员。">
+<meta name="description" content="查询的逻辑执行顺序(1) FROM &amp;lt; left_table&amp;gt;
+(2) ON &amp;lt; join_condition&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL优化之SQL执行顺序">
 <meta property="og:url" content="http://yoursite.com/2016/05/17/SQL优化之SQL执行顺序/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
-<meta property="og:description" content="我听信了 Just do IT , 所以我现在成了程序员。">
-<meta property="og:updated_time" content="2016-05-17T15:02:35.000Z">
+<meta property="og:description" content="查询的逻辑执行顺序(1) FROM &amp;lt; left_table&amp;gt;
+(2) ON &amp;lt; join_condition&amp;gt;">
+<meta property="og:updated_time" content="2016-05-18T12:26:07.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL优化之SQL执行顺序">
-<meta name="twitter:description" content="我听信了 Just do IT , 所以我现在成了程序员。">
+<meta name="twitter:description" content="查询的逻辑执行顺序(1) FROM &amp;lt; left_table&amp;gt;
+(2) ON &amp;lt; join_condition&amp;gt;">
 
 
 
@@ -281,7 +284,102 @@
       
 
       
-        
+        <h2 id="查询的逻辑执行顺序"><a href="#查询的逻辑执行顺序" class="headerlink" title="查询的逻辑执行顺序"></a>查询的逻辑执行顺序</h2><p>(1) FROM &lt; left_table&gt;</p>
+<p>(2) ON &lt; join_condition&gt;<br><a id="more"></a><br>(3) &lt; join_type&gt;  JOIN &lt; right_table&gt;   </p>
+<p>(4) WHERE &lt; where_condition&gt;</p>
+<p>(5) GROUP BY &lt; group_by_list&gt;</p>
+<p>(6) WITH {cube | rollup}</p>
+<p>(7) HAVING &lt; having_condition&gt;</p>
+<p>(8) SELECT  (9) DISTINCT (11) &lt; top_specification&gt;  &lt; select_list&gt;</p>
+<p>(10) ORDER BY &lt; order_by_list&gt;</p>
+<p>标准的SQL 的解析顺序为:</p>
+<p>(1).FROM 子句 组装来自不同数据源的数据</p>
+<p>(2).WHERE 子句 基于指定的条件对记录进行筛选</p>
+<p>(3).GROUP BY 子句 将数据划分为多个分组</p>
+<p>(4).使用聚合函数进行计算</p>
+<p>(5).使用 HAVING 子句筛选分组</p>
+<p>(6).计算所有的表达式</p>
+<p>(7).使用 ORDER BY 对结果集进行排序</p>
+<h2 id="执行顺序："><a href="#执行顺序：" class="headerlink" title="执行顺序："></a>执行顺序：</h2><p>1.FROM： 对 FROM 子句中前两个表执行笛卡尔积生成虚拟表 vt1</p>
+<p>2.ON: 对 vt1 表应用 ON 筛选器只有满足 &lt; join_condition&gt; 为真的行才被插入 vt2</p>
+<p>3.OUTER(join)： 如果指定了 OUTER JOIN 保留表 (preserved table) 中未找到的行将行作为外部行添加到 vt2  生成 t3 如果 from 包含两个以上表则对上一个联结生成的结果表和下一个表重复执行步骤和步骤直接结束</p>
+<p>4.WHERE： 对 vt3 应用 WHERE 筛选器只有使 &lt; where_condition&gt; 为 true 的行才被插入 vt4</p>
+<p>5.GROUP BY： 按 GROUP BY 子句中的列列表对 vt4 中的行分组生成 vt5</p>
+<p>6.CUBE|ROLLUP：把超组 (supergroups) 插入 vt6 生成 vt6</p>
+<p>7.HAVING： 对 vt6 应用 HAVING 筛选器只有使 &lt; having_condition&gt; 为 true 的组才插入 vt7</p>
+<p>8.SELECT： 处理 select 列表产生 vt8</p>
+<p>9.DISTINCT： 将重复的行从 vt8 中去除产生 vt9</p>
+<p>10.ORDER BY： 将 vt9 的行按 order by 子句中的列列表排序生成一个游标 vc10</p>
+<p>11.TOP： 从 vc10 的开始处选择指定数量或比例的行生成 vt11 并返回调用者</p>
+<p>看到这里，那么用过 linqtosql 的语法有点相似啊？如果我们我们了解了 sqlserver 执行顺序，那么我们就接下来进一步养成日常 sql 好习惯，也就是在实现功能同时有考虑性能的思想，数据库是能进行集合运算的工具，我们应该尽量的利用这个工具，所谓集合运算实际就是批量运算，就是尽量减少在客户端进行大数据量的循环操作，而用SQL语句或者存储过程代替。</p>
+<h2 id="只返回需要的数据"><a href="#只返回需要的数据" class="headerlink" title="只返回需要的数据"></a>只返回需要的数据</h2><p>　　返回数据到客户端至少需要数据库提取数据、网络传输数据、客户端接收数据以及客户端处理数据等环节，如果返回不需要的数据，就会增加服务器、网络和客户端的无效劳动，其害处是显而易见的，避免这类事件需要注意：</p>
+<h3 id="横向来看"><a href="#横向来看" class="headerlink" title="横向来看"></a>横向来看</h3><p>　　(1) 不要写 SELECT * 的语句，而是选择你需要的字段。</p>
+<p>　　(2) 当在 SQL 语句中连接多个表时, 请使用表的别名并把别名前缀于每个 Column 上。这样一来,就可以减少解析的时间并减少那些由 Column 歧义引起的语法错误。 </p>
+<p>　　<br>　　如有表 table1(ID,col1) 和 table2(ID,col2)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">　　Select A.ID, A.col1, B.col2</span><br><span class="line">　　-- Select A.ID, col1, col2 –不要这么写，不利于将来程序扩展</span><br><span class="line"></span><br><span class="line">　　from table1 A inner join table2 B on A.ID=B.ID Where …</span><br></pre></td></tr></table></figure></p>
+<h3 id="纵向来看，"><a href="#纵向来看，" class="headerlink" title="纵向来看，"></a>纵向来看，</h3><p>(1)合理写 WHERE 子句，不要写没有 WHERE 的 SQL 语句。</p>
+<p>(2) SELECT TOP N * –没有 WHERE 条件的用此替代</p>
+<h3 id="尽量少做重复的工作"><a href="#尽量少做重复的工作" class="headerlink" title="尽量少做重复的工作"></a>尽量少做重复的工作</h3><p>A、控制同一语句的多次执行，特别是一些基础数据的多次执行是很多程序员很少注意的。</p>
+<p>B、减少多次的数据转换，也许需要数据转换是设计的问题，但是减少次数是程序员可以做到的。</p>
+<p>C、杜绝不必要的子查询和连接表，子查询在执行计划一般解释成外连接，多余的连接表带来额外的开销。</p>
+<p>D、合并对同一表同一条件的多次 UPDATE.</p>
+<p>E、UPDATE 操作不要拆成 DELETE 操作 + INSERT 操作的形式，虽然功能相同，但是性能差别是很大的。</p>
+<h3 id="注意临时表和表变量的用法"><a href="#注意临时表和表变量的用法" class="headerlink" title="注意临时表和表变量的用法"></a>注意临时表和表变量的用法</h3><p>在复杂系统中，临时表和表变量很难避免，关于临时表和表变量的用法，需要注意：</p>
+<p>A、如果语句很复杂，连接太多，可以考虑用临时表和表变量分步完成。</p>
+<p>B、如果需要多次用到一个大表的同一部分数据，考虑用临时表和表变量暂存这部分数据。</p>
+<p>C、如果需要综合多个表的数据，形成一个结果，可以考虑用临时表和表变量分步汇总这多个表的数据。</p>
+<p>D、其他情况下，应该控制临时表和表变量的使用。</p>
+<p>E、关于临时表和表变量的选择，很多说法是表变量在内存，速度快，应该首选表变量，但是在实际使用中发现，</p>
+<p>(1)主要考虑需要放在临时表的数据量，在数据量较多的情况下，临时表的速度反而更快。</p>
+<p>(2)执行时间段与预计执行时间(多长)</p>
+<p>F、关于临时表产生使用 SELECT INTO 和 CREATE TABLE + INSERT INTO 的选择，一般情况下，</p>
+<p>SELECT INTO 会比 CREATE TABLE + INSERT INTO 的方法快很多，</p>
+<p>但是 SELECT INTO 会锁定 TEMPDB 的系统表 SYSOBJECTS、SYSINDEXES、SYSCOLUMNS，在多用户并发环境下，容易阻塞其他进程，</p>
+<p>所以我的建议是，在并发系统中，尽量使用 CREATE TABLE + INSERT INTO，而大数据量的单个语句使用中，使用 SELECT INTO。</p>
+<h3 id="子查询的用法（1）"><a href="#子查询的用法（1）" class="headerlink" title="子查询的用法（1）"></a>子查询的用法（1）</h3><p>子查询是一个 SELECT 查询，它嵌套在 SELECT、INSERT、UPDATE、DELETE 语句或其它子查询中。</p>
+<p>任何允许使用表达式的地方都可以使用子查询，子查询可以使我们的编程灵活多样，可以用来实现一些特殊的功能。但是在性能上，</p>
+<p>往往一个不合适的子查询用法会形成一个性能瓶颈。如果子查询的条件中使用了其外层的表的字段，这种子查询就叫作相关子查询。</p>
+<p>相关子查询可以用IN、NOT IN、EXISTS、NOT EXISTS引入。 关于相关子查询，应该注意：</p>
+<p>A、NOT IN、NOT EXISTS的相关子查询可以改用LEFT JOIN代替写法。比如：<br>SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID NOT IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)<br>可以改写成：<br>SELECT A.PUB_NAME FROM PUBLISHERS A LEFT JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID WHERE B.PUB_ID IS NULL</p>
+<p>SELECT TITLE FROM TITLES WHERE NOT EXISTS (SELECT TITLE_ID FROM SALES WHERE TITLE_ID = TITLES.TITLE_ID)<br>可以改写成：<br>SELECT TITLE FROM TITLES LEFT JOIN SALES ON SALES.TITLE_ID = TITLES.TITLE_ID WHERE SALES.TITLE_ID IS NULL</p>
+<p>B、 如果保证子查询没有重复 ，IN、EXISTS的相关子查询可以用INNER JOIN 代替。比如：</p>
+<p>SELECT PUB_NAMEFROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)<br>可以改写成：<br>SELECT A.PUB_NAME –SELECT DISTINCT A.PUB_NAME FROM PUBLISHERS A INNER JOIN TITLES B ON B.TYPE = ‘BUSINESS’ AND A.PUB_ID=B. PUB_ID</p>
+<p>C、 IN的相关子查询用EXISTS代替，比如</p>
+<p>SELECT PUB_NAME FROM PUBLISHERS WHERE PUB_ID IN (SELECT PUB_ID FROM TITLES WHERE TYPE = ‘BUSINESS’)<br>可以用下面语句代替：<br>SELECT PUB_NAME FROM PUBLISHERS WHERE EXISTS(SELECT 1 FROM TITLES WHERE TYPE = ‘BUSINESS’ AND PUB_ID= PUBLISHERS.PUB_ID) </p>
+<p>D、 不要用COUNT(*)的子查询判断是否存在记录，最好用LEFT JOIN或者EXISTS，比如有人写这样的语句：</p>
+<p>SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)=0<br>应该改成：<br>SELECT JOBS.JOB_DESC FROM JOBS LEFT JOIN EMPLOYEE ON EMPLOYEE.JOB_ID=JOBS.JOB_ID WHERE EMPLOYEE.EMP_ID IS NULL</p>
+<p>SELECT JOB_DESC FROM JOBS WHERE (SELECT COUNT(*) FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)&lt;&gt;0<br>应该改成：<br>SELECT JOB_DESC FROM JOBS WHERE EXISTS (SELECT 1 FROM EMPLOYEE WHERE JOB_ID=JOBS.JOB_ID)</p>
+<p>七：尽量使用索引</p>
+<p>建立索引后，并不是每个查询都会使用索引，在使用索引的情况下，索引的使用效率也会有很大的差别。只要我们在查询语句中没有强制指定索引，</p>
+<p>索引的选择和使用方法是SQLSERVER的优化器自动作的选择，而它选择的根据是查询语句的条件以及相关表的统计信息，这就要求我们在写SQL</p>
+<p>语句的时候尽量使得优化器可以使用索引。为了使得优化器能高效使用索引，写语句的时候应该注意：</p>
+<p>A、不要对索引字段进行运算，而要想办法做变换，比如</p>
+<p>SELECT ID FROM T WHERE NUM/2=100<br>应改为:<br>SELECT ID FROM T WHERE NUM=100*2</p>
+<p>SELECT ID FROM T WHERE NUM/2=NUM1<br>如果NUM有索引应改为:<br>SELECT ID FROM T WHERE NUM=NUM1*2<br>如果NUM1有索引则不应该改。</p>
+<p>发现过这样的语句：<br>SELECT 年,月,金额 FROM 结余表  WHERE 100<em>年+月=2010</em>100+10<br>应该改为：<br>SELECT 年,月,金额 FROM 结余表 WHERE 年=2010 AND月=10</p>
+<p>B、 不要对索引字段进行格式转换</p>
+<p>日期字段的例子：<br>WHERE CONVERT(VARCHAR(10), 日期字段,120)=’2010-07-15′<br>应该改为<br>WHERE日期字段〉=’2010-07-15′   AND   日期字段&lt;‘2010-07-16′</p>
+<p>ISNULL转换的例子：<br>WHERE ISNULL(字段,”)&lt;&gt;”应改为:WHERE字段&lt;&gt;”<br>WHERE ISNULL(字段,”)=”不应修改<br>WHERE ISNULL(字段,’F’) =’T’应改为: WHERE字段=’T’<br>WHERE ISNULL(字段,’F’)&lt;&gt;’T’不应修改</p>
+<p>C、 不要对索引字段使用函数</p>
+<p>WHERE LEFT(NAME, 3)=’ABC’ 或者WHERE SUBSTRING(NAME,1, 3)=’ABC’<br>应改为:<br>WHERE NAME LIKE ‘ABC%’</p>
+<p>日期查询的例子：</p>
+<p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)=0<br>应改为:<br>WHERE 日期&gt;=’2010-06-30′ AND 日期 &lt;‘2010-07-01′</p>
+<p>WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;0<br>应改为:<br>WHERE 日期 &lt;‘2010-06-30′</p>
+<p>WHERE DATEDIFF(DAY, 日期,’2010-06-30’)&gt;=0<br>应改为:<br>WHERE 日期 &lt;‘2010-07-01′</p>
+<p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)<0 应改为:="" where="" 日期="">=’2010-07-01′</0></p>
+<p>WHERE DATEDIFF(DAY, 日期,’2010-06-30′)&lt;=0<br>应改为:<br>WHERE 日期&gt;=’2010-06-30</p>
+<p>D、不要对索引字段进行多字段连接</p>
+<p>比如：</p>
+<p>WHERE FAME+ ‘. ‘+LNAME=’HAIWEI.YANG’<br>应改为:<br>WHERE FNAME=’HAIWEI’ AND LNAME=’YANG’</p>
+<p>八：多表连接的连接条件对索引的选择有着重要的意义，所以我们在写连接条件条件的时候需要特别注意。</p>
+<p>A、多表连接的时候，连接条件必须写全，宁可重复，不要缺漏。</p>
+<p>B、连接条件尽量使用聚集索引</p>
+<p>C、注意ON、WHERE和HAVING部分条件的区别</p>
+<p>ON是最先执行， WHERE次之，HAVING最后，因为ON是先把不符合条件的记录过滤后才进行统计，它就可以减少中间运算要处理的数据，按理说应该速度是最快的，WHERE也应该比 HAVING快点的，因为它过滤数据后才进行SUM，在两个表联接时才用ON的，所以在一个表的时候，就剩下WHERE跟HAVING比较了</p>
+<p>考虑联接优先顺序：</p>
+<p>(1)INNER JOIN</p>
+<p>(2)LEFT JOIN (注：RIGHT JOIN 用 LEFT JOIN 替代)</p>
+<p>(3)CROSS JOIN</p>
+
       
     </div>
 
@@ -304,6 +402,8 @@
           
             <a href="/tags/Datebase/" rel="tag">#Datebase</a>
           
+            <a href="/tags/sql优化/" rel="tag">#sql优化</a>
+          
         </div>
       
 
@@ -311,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/12/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/05/17/算法之时间复杂度/" rel="next" title="算法之时间复杂度">
+                <i class="fa fa-chevron-left"></i> 算法之时间复杂度
               </a>
             
           </div>
@@ -395,7 +495,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags/git">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -424,7 +524,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询的逻辑执行顺序"><span class="nav-number">1.</span> <span class="nav-text">查询的逻辑执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行顺序："><span class="nav-number">2.</span> <span class="nav-text">执行顺序：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只返回需要的数据"><span class="nav-number">3.</span> <span class="nav-text">只返回需要的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#横向来看"><span class="nav-number">3.1.</span> <span class="nav-text">横向来看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纵向来看，"><span class="nav-number">3.2.</span> <span class="nav-text">纵向来看，</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量少做重复的工作"><span class="nav-number">3.3.</span> <span class="nav-text">尽量少做重复的工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意临时表和表变量的用法"><span class="nav-number">3.4.</span> <span class="nav-text">注意临时表和表变量的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询的用法（1）"><span class="nav-number">3.5.</span> <span class="nav-text">子查询的用法（1）</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
