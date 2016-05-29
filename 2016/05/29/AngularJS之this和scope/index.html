@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="just do IT,前端," />
+  <meta name="keywords" content="just do IT,前端,AngularJS," />
 
 
 
@@ -84,25 +84,22 @@
 
 
 
-<meta name="description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
-Alio E Olio无敌是最寂寞
-Boolean1!!&apos;foo&apos;
-通过两个取反，可以强制转换为Boolean类型">
+<meta name="description" content="枫吹的我喘不过气来!
+
+从若干的基础教程来看，scope 是 angular controller 里数据绑定的关键，不管是从 controller 到 view 还是相反。用 scope ，可以轻易声明一个可以到处使用的变量，例如：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js语法笔记">
-<meta property="og:url" content="http://yoursite.com/2016/05/18/js语法笔记/index.html">
+<meta property="og:title" content="AngularJS之this和scope">
+<meta property="og:url" content="http://yoursite.com/2016/05/29/AngularJS之this和scope/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
-<meta property="og:description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
-Alio E Olio无敌是最寂寞
-Boolean1!!&apos;foo&apos;
-通过两个取反，可以强制转换为Boolean类型">
-<meta property="og:updated_time" content="2016-05-18T13:41:28.452Z">
+<meta property="og:description" content="枫吹的我喘不过气来!
+
+从若干的基础教程来看，scope 是 angular controller 里数据绑定的关键，不管是从 controller 到 view 还是相反。用 scope ，可以轻易声明一个可以到处使用的变量，例如：">
+<meta property="og:updated_time" content="2016-05-29T14:29:04.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js语法笔记">
-<meta name="twitter:description" content="别人看不懂的代码，才是最牛逼的代码!(哎哎别打我)
-Alio E Olio无敌是最寂寞
-Boolean1!!&apos;foo&apos;
-通过两个取反，可以强制转换为Boolean类型">
+<meta name="twitter:title" content="AngularJS之this和scope">
+<meta name="twitter:description" content="枫吹的我喘不过气来!
+
+从若干的基础教程来看，scope 是 angular controller 里数据绑定的关键，不管是从 controller 到 view 还是相反。用 scope ，可以轻易声明一个可以到处使用的变量，例如：">
 
 
 
@@ -120,7 +117,7 @@ Boolean1!!&apos;foo&apos;
   };
 </script>
 
-  <title> js语法笔记 | Bloom's Blog </title>
+  <title> AngularJS之this和scope | Bloom's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +247,7 @@ Boolean1!!&apos;foo&apos;
             
             
               
-                js语法笔记
+                AngularJS之this和scope
               
             
           </h1>
@@ -262,8 +259,8 @@ Boolean1!!&apos;foo&apos;
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-18T21:31:05+08:00" content="2016-05-18">
-              2016-05-18
+            <time itemprop="dateCreated" datetime="2016-05-29T22:23:18+08:00" content="2016-05-29">
+              2016-05-29
             </time>
           </span>
 
@@ -290,21 +287,15 @@ Boolean1!!&apos;foo&apos;
       
 
       
-        <blockquote><p>别人看不懂的代码，才是最牛逼的代码!(哎<code>哎</code>别打我)</p>
-<footer><strong>Alio E Olio</strong><cite>无敌是最寂寞</cite></footer></blockquote>
-<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!<span class="string">'foo'</span></span><br></pre></td></tr></table></figure>
-<p>通过两个取反，可以强制转换为Boolean类型<br><a id="more"></a></p>
-<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+<span class="string">'45'</span></span><br><span class="line">+<span class="keyword">new</span> Date</span><br></pre></td></tr></table></figure>
-<p>String转化为Number    </p>
-<h2 id="Closure闭包"><a href="#Closure闭包" class="headerlink" title="Closure闭包"></a>Closure闭包</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var isType = function(type) &#123;</span><br><span class="line">    <span class="keyword">return</span> function(obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> toString.call(obj) == <span class="string">'[Object '</span> + type + <span class="string">']'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过高阶函数很轻松的实现判定类别</p>
-<h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var foo = document.querySelector(<span class="string">'.foo'</span>)</span><br><span class="line">foo.addEventListener(<span class="string">'click'</span>, (function() &#123;</span><br><span class="line">    var times = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> function() &#123;</span><br><span class="line">        times++</span><br><span class="line">        console.log(times)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(), <span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
-<p>通过创建一个闭包，把times封装到里面，然后返回函数。</p>
-<h2 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt"></a>parseInt</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~~<span class="number">3.14159</span></span><br><span class="line"><span class="comment">// =&gt; 3</span></span><br><span class="line">~~<span class="number">5.678</span></span><br><span class="line"><span class="comment">// =&gt; 5</span></span><br></pre></td></tr></table></figure>
-<p>~是一个叫做按位非的操作，会返回数值的反码。是二进制操作。JavaScript中的number都是double类型的，在位操作的时候要转化成int，两次~就还是原数。</p>
-<h2 id="Hex"><a href="#Hex" class="headerlink" title="Hex"></a>Hex</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(~~(Math.random()*(<span class="number">1</span>&lt;&lt;<span class="number">24</span>))).toString(<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
-<p>十六进制操作。其实就是一个Array.prototype.toString(16)的用法<br>1&lt;&lt;24的操作。是1左移24位。000000000000000000000001左移24位，变成了1000000000000000000000000</p>
-<p>References:<br><a href="https://www.sdk.cn/news/3025" target="_blank" rel="external">https://www.sdk.cn/news/3025</a><br>《深入浅出Node.js》<br>《JavaScript高级程序设计》<br>《JavaScript设计模式与开发实践》</p>
+        <blockquote><p>枫吹的我喘不过气来!</p>
+</blockquote>
+<p>从若干的基础教程来看，scope 是 angular controller 里数据绑定的关键，不管是从 controller 到 view 还是相反。<br>用 scope ，可以轻易声明一个可以到处使用的变量，例如：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'MainCtrl'</span>, function ($scope) &#123;</span><br><span class="line">  $scope.title = <span class="string">'Some title'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>而使用 this ，则可以声明一个在 controller 作用域内使用的变量，类似 java 的类当中 public 的局部变量。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'MainCtrl'</span>, function () &#123;</span><br><span class="line">  <span class="keyword">this</span>.title = <span class="string">'Some title'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>从“对象”的角度来看， scope 的写法像是声明了一个全局变量（就是怎么用怎么错的全局变量），然后不停的赋值、修改元素、删除元素。</p>
+<p>当有了 Controller As 这个东西的时候，this 就变的很好用。可以轻易搞清楚各个 controller 的层级关系，调用到合适的变量。这一点在嵌套的时候尤其明显。举个栗子</p>
+<p>使用this之前：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller="MainCtrl"&gt;</span><br><span class="line">  &#123;&#123; title &#125;&#125;</span><br><span class="line">  &lt;div ng-controller="ChildCtrl"&gt;</span><br><span class="line">    Scope title: &#123;&#123; title &#125;&#125;</span><br><span class="line">    Parent title: &#123;&#123; $parent.title &#125;&#125;</span><br><span class="line">    &lt;div ng-controller="GrandsonCtrl"&gt;</span><br><span class="line">      Scope title: &#123;&#123; title &#125;&#125;</span><br><span class="line">      Parent title: &#123;&#123; $parent.title &#125;&#125;</span><br><span class="line">      Parent parent title: &#123;&#123; $parent.$parent.title &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>使用了this之后：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller="MainCtrl as parent"&gt;</span><br><span class="line">  &#123;&#123; parent.title &#125;&#125;</span><br><span class="line">  &lt;div ng-controller="ChildCtrl as child"&gt;</span><br><span class="line">    Scope title: &#123;&#123; child.title &#125;&#125;</span><br><span class="line">    Parent title: &#123;&#123; parent.title &#125;&#125;</span><br><span class="line">    &lt;div ng-controller="GrandsonCtrl as grandson"&gt;</span><br><span class="line">      Scope title: &#123;&#123; grandson.title &#125;&#125;</span><br><span class="line">      Parent title: &#123;&#123; child.title &#125;&#125;</span><br><span class="line">      Parent parent title: &#123;&#123; parent.title &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其实如果平时就嵌套两层以内，使用起来差别也不是很大。有一点区别就是，要使用 scope ，必须为 controller 注入 $scope 。而使用 Controller As 和 this 则不必，直接使用即可。所以在某种程度上，你可以决定何时需要使用 scope 。</p>
 
       
     </div>
@@ -351,6 +342,8 @@ Boolean1!!&apos;foo&apos;
           
             <a href="/tags/前端/" rel="tag">#前端</a>
           
+            <a href="/tags/AngularJS/" rel="tag">#AngularJS</a>
+          
         </div>
       
 
@@ -358,17 +351,13 @@ Boolean1!!&apos;foo&apos;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/18/正则表达式/" rel="next" title="正则表达式">
-                <i class="fa fa-chevron-left"></i> 正则表达式
+              <a href="/2016/05/29/angularJS笔记一：HelloWorld及常识/" rel="next" title="angularJS笔记一：HelloWorld及常识">
+                <i class="fa fa-chevron-left"></i> angularJS笔记一：HelloWorld及常识
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/mysql5-7zip安装步骤/" rel="prev" title="mysql5.7zip安装步骤">
-                mysql5.7zip安装步骤 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,7 +464,7 @@ Boolean1!!&apos;foo&apos;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean"><span class="nav-number">1.</span> <span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number"><span class="nav-number">2.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Closure闭包"><span class="nav-number">3.</span> <span class="nav-text">Closure闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event"><span class="nav-number">4.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parseInt"><span class="nav-number">5.</span> <span class="nav-text">parseInt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hex"><span class="nav-number">6.</span> <span class="nav-text">Hex</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
