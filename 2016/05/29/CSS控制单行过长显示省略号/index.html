@@ -88,16 +88,16 @@
 人民出版社毛泽东选集
 需求如下：显示单行，超过固定宽度则显示为省略号。先看效果图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS控制单行过长显示省略号">
+<meta property="og:title" content="CSS控制单行or多行过长显示省略号">
 <meta property="og:url" content="http://yoursite.com/2016/05/29/CSS控制单行过长显示省略号/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
 <meta property="og:description" content="同志快醒醒，你还有一段代码提示错误，起来改改！
 人民出版社毛泽东选集
 需求如下：显示单行，超过固定宽度则显示为省略号。先看效果图">
 <meta property="og:image" content="http://yoursite.com/images/css.jpg">
-<meta property="og:updated_time" content="2016-05-29T14:04:38.375Z">
+<meta property="og:updated_time" content="2016-06-02T14:24:16.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS控制单行过长显示省略号">
+<meta name="twitter:title" content="CSS控制单行or多行过长显示省略号">
 <meta name="twitter:description" content="同志快醒醒，你还有一段代码提示错误，起来改改！
 人民出版社毛泽东选集
 需求如下：显示单行，超过固定宽度则显示为省略号。先看效果图">
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title> CSS控制单行过长显示省略号 | Bloom's Blog </title>
+  <title> CSS控制单行or多行过长显示省略号 | Bloom's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +249,7 @@
             
             
               
-                CSS控制单行过长显示省略号
+                CSS控制单行or多行过长显示省略号
               
             
           </h1>
@@ -291,7 +291,7 @@
       
         <blockquote><p>同志快醒醒，你还有一段代码提示错误，起来改改！</p>
 <footer><strong>人民出版社</strong><cite>毛泽东选集</cite></footer></blockquote>
-<p>需求如下：显示单行，超过固定宽度则显示为省略号。<br>先看效果图<br><a id="more"></a><br><img src="/images/css.jpg" alt="Alt text"><br>需要控制三个属性,代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">white-space: nowrap;<span class="comment">//不换行</span></span><br><span class="line">overflow: hidden;<span class="comment">//超过宽度自动隐藏</span></span><br><span class="line">text-overflow: ellipsis;<span class="comment">//隐藏部分显示为省略号</span></span><br></pre></td></tr></table></figure></p>
+<p>需求如下：显示单行，超过固定宽度则显示为省略号。<br>先看效果图<br><a id="more"></a><br><img src="/images/css.jpg" alt="Alt text"><br>需要控制三个属性,代码如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">white-space: nowrap;//不换行</span><br><span class="line">overflow: hidden;//超过宽度自动隐藏</span><br><span class="line">text-overflow: ellipsis;//隐藏部分显示为省略号</span><br><span class="line">/*</span><br><span class="line"> *多行过长显示省略号</span><br><span class="line"> */</span><br><span class="line">overflow: hidden;</span><br><span class="line">text-overflow: ellipsis;</span><br><span class="line">display: -webkit-box;</span><br><span class="line">-webkit-line-clamp: 4;</span><br><span class="line">-webkit-box-orient: vertical;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
