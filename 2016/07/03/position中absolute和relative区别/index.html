@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="just do IT,前端," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description" content="我听信了 Just do IT , 所以我现在成了程序员。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bloom's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Maven/index.html">
+<meta name="description" content="在用CSS+DIV进行布局定位的时候，一直对position的四个属性值relative,absolute,static,fixed分的不是很清楚，以致经常会出现让人很郁闷的结果。今天研究了一下，总算有所了解。在此总结一下：
+先看下position各个属性值的定义：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS:position中absolute和relative区别">
+<meta property="og:url" content="http://yoursite.com/2016/07/03/position中absolute和relative区别/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
-<meta property="og:description" content="我听信了 Just do IT , 所以我现在成了程序员。">
+<meta property="og:description" content="在用CSS+DIV进行布局定位的时候，一直对position的四个属性值relative,absolute,static,fixed分的不是很清楚，以致经常会出现让人很郁闷的结果。今天研究了一下，总算有所了解。在此总结一下：
+先看下position各个属性值的定义：">
+<meta property="og:updated_time" content="2016-07-03T07:19:35.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bloom's Blog">
-<meta name="twitter:description" content="我听信了 Just do IT , 所以我现在成了程序员。">
+<meta name="twitter:title" content="CSS:position中absolute和relative区别">
+<meta name="twitter:description" content="在用CSS+DIV进行布局定位的时候，一直对position的四个属性值relative,absolute,static,fixed分的不是很清楚，以致经常会出现让人很郁闷的结果。今天研究了一下，总算有所了解。在此总结一下：
+先看下position各个属性值的定义：">
 
 
 
@@ -110,7 +114,7 @@
   };
 </script>
 
-  <title> 标签: Maven | Bloom's Blog </title>
+  <title> CSS:position中absolute和relative区别 | Bloom's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -131,7 +135,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,46 +223,153 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Maven
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS:position中absolute和relative区别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-03T14:59:39+08:00" content="2016-07-03">
+              2016-07-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>在用CSS+DIV进行布局定位的时候，一直对position的四个属性值relative,absolute,static,fixed分的不是很清楚，以致经常会出现让人很郁闷的结果。今天研究了一下，总算有所了解。在此总结一下：</p>
+<p>先看下position各个属性值的定义：<br><a id="more"></a><br>1、static：默认值。没有定位，元素出现在正常的文本流中（忽略top,bottom,left,right或者z-index声明）。</p>
+<p>2、relative：生成相对定位的元素，通过top,bottom,left,right的设置相对于其正常位置进行定位。可通过z-index进行层次分级。</p>
+<p>3、absolute：生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位。元素的位置通过”left”,”top”,”right”以及”bottom”属性进行规定。可通过z-index进行层次分级。</p>
+<p>4、fixed：生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过”left”,”top”,”right”以及”bottom”属性进行规定。可通过z-index进行层次分级。</p>
+<p>static与fixed的定位方式较好理解，在此不做分析。下面对应用的较多的relative和absolute进行分析：<br><a href="http://blog.csdn.net/lan861698789/article/details/22896751" target="_blank" rel="external">原文地址</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/05/29/HelloMaven教程/" itemprop="url">
-              
-                <span itemprop="name">HelloMaven教程</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>有疑问？有BUG？感觉不错？可以打赏留言给我嘛！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weichat.jpg" alt="LiYinghao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/ali.jpg" alt="LiYinghao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-29T21:08:03+08:00"
-              content="2016-05-29" >
-          05-29
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/just-do-IT/" rel="tag">#just do IT</a>
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/29/angularJS笔记一：HelloWorld及常识/" rel="next" title="angularJS笔记一：HelloWorld及常识">
+                <i class="fa fa-chevron-left"></i> angularJS笔记一：HelloWorld及常识
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/03/常用MarkDown语法/" rel="prev" title="常用MarkDown语法">
+                常用MarkDown语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -266,6 +377,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -285,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/1.jpg"
@@ -354,6 +478,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -450,6 +585,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
