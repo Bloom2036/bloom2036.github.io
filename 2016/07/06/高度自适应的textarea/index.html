@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git," />
+  <meta name="keywords" content="just do IT,前端," />
 
 
 
@@ -84,25 +84,22 @@
 
 
 
-<meta name="description" content="天堂有路你不走,学海无涯苦作舟!
-李白唐诗三百首
-Git常用命令显示工作区状态
-1$ git status">
+<meta name="description" content="甲骨文放弃了JavaEE。
+记与2016年7月6日
+Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git学习之路">
-<meta property="og:url" content="http://yoursite.com/2016/05/12/Git学习之路/index.html">
+<meta property="og:title" content="一个高度根据行数自适应的Textarea">
+<meta property="og:url" content="http://yoursite.com/2016/07/06/高度自适应的textarea/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
-<meta property="og:description" content="天堂有路你不走,学海无涯苦作舟!
-李白唐诗三百首
-Git常用命令显示工作区状态
-1$ git status">
-<meta property="og:updated_time" content="2016-05-12T14:39:35.324Z">
+<meta property="og:description" content="甲骨文放弃了JavaEE。
+记与2016年7月6日
+Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
+<meta property="og:updated_time" content="2016-07-06T11:46:42.361Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git学习之路">
-<meta name="twitter:description" content="天堂有路你不走,学海无涯苦作舟!
-李白唐诗三百首
-Git常用命令显示工作区状态
-1$ git status">
+<meta name="twitter:title" content="一个高度根据行数自适应的Textarea">
+<meta name="twitter:description" content="甲骨文放弃了JavaEE。
+记与2016年7月6日
+Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
 
 
 
@@ -120,7 +117,7 @@ Git常用命令显示工作区状态
   };
 </script>
 
-  <title> Git学习之路 | Bloom's Blog </title>
+  <title> 一个高度根据行数自适应的Textarea | Bloom's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +247,7 @@ Git常用命令显示工作区状态
             
             
               
-                Git学习之路
+                一个高度根据行数自适应的Textarea
               
             
           </h1>
@@ -262,8 +259,8 @@ Git常用命令显示工作区状态
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T20:03:51+08:00" content="2016-05-12">
-              2016-05-12
+            <time itemprop="dateCreated" datetime="2016-07-06T19:23:58+08:00" content="2016-07-06">
+              2016-07-06
             </time>
           </span>
 
@@ -290,62 +287,12 @@ Git常用命令显示工作区状态
       
 
       
-        <blockquote><p>天堂有路你不走,学海无涯苦作舟!</p>
-<footer><strong>李白</strong><cite>唐诗三百首</cite></footer></blockquote>
-<h2 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h2><p>显示工作区状态</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>显示工作区文件修改内容( git diff HEAD – <filename> 查看于版本库中file的区别)</filename></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br></pre></td></tr></table></figure>
-<p>文件添加至缓存区(stage)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add</span><br></pre></td></tr></table></figure>
-<p>文件提交至版本库：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
-<p>查看提交日志 （–pretty=oneline 参数简化显示信息）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log</span><br></pre></td></tr></table></figure>
-<p>返回上一个版本 ( –hard 版本号参数 制定恢复到指定版本)：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
-<p>查看命令日志：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
-<p>撤消工作区修改：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<p>撤消缓存区修改:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<p>删除版本库中<file></file></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rm &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<p>从版本库中提取<file>到工作区:</file></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<p>提交本地master分支:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
-<p>创建一个新分支 （-b 参数表示创建并切换分支，同等于 git branch <branchname> + git checkout <branckname>）:</branckname></branchname></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git check -b &lt;branchName&gt;</span><br></pre></td></tr></table></figure>
-<p>删除一个分支:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d &lt;branchName&gt;</span><br></pre></td></tr></table></figure>
-<p>查看当前分支:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure>
-<p>合并分支到当前分支:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge &lt;branchName&gt;</span><br></pre></td></tr></table></figure>
-<p>查看分支合并图（git log –graph –pretty=oneline –abbrev-commit ）；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log --graph</span><br></pre></td></tr></table></figure>
-<p>查看远程仓库:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-<p>从远程 origin 仓库的 master 分支代码下载到本地 origin master 分支:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin master</span><br></pre></td></tr></table></figure>
-<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><p>Step 1:<br>用户主目录下创建.ssh (#codeblock id_rsa 为私密钥匙,id_rsa.pub为公用钥匙#)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">"youremail@xxx.com"</span></span><br></pre></td></tr></table></figure>
-<p>Step 2:<br>登陆 GitHub, set 选项,添加 SSH Key 粘贴 id_rsa.pub 内容。</p>
-<p>Step 3:<br>GitHub新建仓库，其余默认设置，按照提示命令复制本地仓库。</p>
-<h3 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h3><p>Step 1:<br>GitHub 创建一个新仓库；</p>
-<p>Step 2:<br>输入 git clone git@github.com:&lt;用户名&gt;/&lt;仓库名&gt;.git 命令开始克隆仓库；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@github.com:bloom2036/bloom.github.io.git</span><br></pre></td></tr></table></figure>
-<h3 id="从远程获取最新版本到本地"><a href="#从远程获取最新版本到本地" class="headerlink" title="从远程获取最新版本到本地"></a>从远程获取最新版本到本地</h3><p>Step 1:<br>从远程 origin 仓库的 master 分支代码下载到本地并创建分支 temp；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin master:temp</span><br></pre></td></tr></table></figure>
-<p>Step 2:<br>比较本地 master 分支和 temp 分支，编辑冲突；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff temp</span><br></pre></td></tr></table></figure>
-<p>Step 3:<br>合并分支；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge temp</span><br></pre></td></tr></table></figure>
-<p>Step 4:<br>删除 temp 分支；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d temp</span><br></pre></td></tr></table></figure>
+        <blockquote><p>甲骨文放弃了JavaEE。</p>
+<footer><strong>记与</strong><cite>2016年7月6日</cite></footer></blockquote>
+<p>Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>CSS：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">textarea&#123;</span><br><span class="line">  display: block;</span><br><span class="line">  height: auto;</span><br><span class="line">  resize: none;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  line-height: 20px;</span><br><span class="line">  padding: 1px;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重头戏JS,靠JS绑定时间监听并改动textarea高度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"> <span class="comment">/*</span><br><span class="line">  *elemt: textarea元素</span><br><span class="line">  *baserows: 基础行数</span><br><span class="line">  *maxrows: 最大行数</span><br><span class="line">  */</span></span><br><span class="line">  <span class="keyword">var</span> adaptiveHeight = <span class="function"><span class="keyword">function</span>(<span class="params">elemt, baserows, maxrows</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/*获取textarea的padding的上下高度*/</span></span><br><span class="line">        <span class="keyword">var</span> po =  <span class="built_in">parseInt</span>(elemt.css(<span class="string">'padding-top'</span>)) + <span class="built_in">parseInt</span>(elemt.css(<span class="string">'padding-bottom'</span>));</span><br><span class="line">        <span class="keyword">var</span> baseLineHeight = <span class="built_in">parseInt</span>(elemt.css(<span class="string">'line-height'</span>));</span><br><span class="line">        <span class="keyword">var</span> baseHeight = baseLineHeight * baserows;</span><br><span class="line">        elemt.height(baseHeight);</span><br><span class="line">        <span class="keyword">var</span> scrollval = elemt[<span class="number">0</span>].scrollHeight;</span><br><span class="line">        <span class="comment">/*检测是否达到了最大行数，达到了，则把高度设置为最大高度*/</span></span><br><span class="line">        <span class="keyword">if</span> (scrollval - po &gt;= baseLineHeight * maxrows) &#123;</span><br><span class="line">            scrollval = baseHeight + baseLineHeight * (maxrows-baserows) + po;</span><br><span class="line">        &#125;</span><br><span class="line">        elemt.height(scrollval - po);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> adaptiveTextarea = <span class="function"><span class="keyword">function</span>(<span class="params">sel, baserows, maxrows, callback</span>)</span>&#123;</span><br><span class="line">        sel.bind(<span class="string">'input propertychange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            adaptiveHeight($(<span class="keyword">this</span>), baserows, maxrows);</span><br><span class="line">            <span class="keyword">if</span>(callback) callback(e);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">/*初始化textarea高度*/</span></span><br><span class="line">        adaptiveHeight(sel, baserows, maxrows);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*使用 初始行数为1， 最大行数为5*/</span></span><br><span class="line">    adaptiveTextarea($(<span class="string">'textarea'</span>), <span class="number">1</span>, <span class="number">5</span>);</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://veerkat.me/blog/posts/jQuery-shi-xian-textarea-gao-du-zi-shi-ying.html" target="_blank" rel="external">原文地址</a></p>
 
       
     </div>
@@ -388,7 +335,9 @@ Git常用命令显示工作区状态
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag">#git</a>
+            <a href="/tags/just-do-IT/" rel="tag">#just do IT</a>
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
           
         </div>
       
@@ -397,12 +346,16 @@ Git常用命令显示工作区状态
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/03/常用MarkDown语法/" rel="next" title="常用MarkDown语法">
+                <i class="fa fa-chevron-left"></i> 常用MarkDown语法
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/17/算法之时间复杂度/" rel="prev" title="算法之时间复杂度">
-                算法之时间复杂度 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/06/JS时间冒泡及jquery解决方法/" rel="prev" title="JS时间冒泡及jquery解决方法">
+                JS时间冒泡及jquery解决方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +496,7 @@ Git常用命令显示工作区状态
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git常用命令"><span class="nav-number">1.</span> <span class="nav-text">Git常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">2.</span> <span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加远程仓库"><span class="nav-number">2.1.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆远程仓库"><span class="nav-number">2.2.</span> <span class="nav-text">克隆远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从远程获取最新版本到本地"><span class="nav-number">2.3.</span> <span class="nav-text">从远程获取最新版本到本地</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
