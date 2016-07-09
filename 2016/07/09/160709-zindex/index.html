@@ -94,15 +94,15 @@
 <meta property="og:description" content="本文作者：imweb 张颖 原文出处：imweb社区。未经同意，禁止转载。
 
 前言关于z-index，每个人都会用，但大多人都不理解其真正的生效机制。最近做项目有很多用到z-index的地方，才发现以前用的一知半解，所以上网查了一些资料梳理了一下。关于z-index的生效机制并不复杂，但如果不花一点时间研究其特点，有很多关键点容易被忽略。">
-<meta property="og:image" content="http://yoursite.com/images/160709-1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/160709-2.jpg">
-<meta property="og:updated_time" content="2016-07-09T16:59:27.618Z">
+<meta property="og:image" content="http://yoursite.com/images/160709-1.png">
+<meta property="og:image" content="http://yoursite.com/images/160709-2.png">
+<meta property="og:updated_time" content="2016-07-09T17:16:14.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="z-index特性">
 <meta name="twitter:description" content="本文作者：imweb 张颖 原文出处：imweb社区。未经同意，禁止转载。
 
 前言关于z-index，每个人都会用，但大多人都不理解其真正的生效机制。最近做项目有很多用到z-index的地方，才发现以前用的一知半解，所以上网查了一些资料梳理了一下。关于z-index的生效机制并不复杂，但如果不花一点时间研究其特点，有很多关键点容易被忽略。">
-<meta name="twitter:image" content="http://yoursite.com/images/160709-1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/160709-1.png">
 
 
 
@@ -295,12 +295,12 @@
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>关于z-index，每个人都会用，但大多人都不理解其真正的生效机制。最近做项目有很多用到z-index的地方，才发现以前用的一知半解，所以上网查了一些资料梳理了一下。<br>关于z-index的生效机制并不复杂，但如果不花一点时间研究其特点，有很多关键点容易被忽略。<br><a id="more"></a></p>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>HTML文档中有三个div元素，每个div中存在一个span元素，三个span元素分别设置背景颜色为red，green，以及blue。然后每个span都设置为position: absolute，三个span的位置稍微错开以便可以仔细观察它们之间的堆叠顺序。然后将第一个span元素的z-index设置为1，其他两个不设置。具体代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"red"</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"green"</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"blue"</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.red, .green, .blue &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 200px;</span><br><span class="line">&#125;</span><br><span class="line">.red &#123;</span><br><span class="line">  background: red;</span><br><span class="line">  z-index: 1;</span><br><span class="line">&#125;</span><br><span class="line">.green &#123;</span><br><span class="line">  background: green;</span><br><span class="line">  top: 50px;</span><br><span class="line">  left: 50px;</span><br><span class="line">&#125;</span><br><span class="line">.blue &#123;</span><br><span class="line">  background: blue;</span><br><span class="line">  top: 100px;</span><br><span class="line">  left: 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果如下：<br><img src="/images/160709-1.jpg" alt="Alt text"><br>那么问题来了，尝试在不打破下述规则的前提下将red span置于blue和green span元素之下：</p>
+<p>结果如下：<br><img src="/images/160709-1.png" alt="Alt text"><br>那么问题来了，尝试在不打破下述规则的前提下将red span置于blue和green span元素之下：</p>
 <p><em>不改变HTML元素的标记
 </em>不添加或者改变任何元素的z-index属性<br>*不添加或者改变任何元素的position属性</p>
 <p>如果不了解z-index的一些特性，对于上述要求估计会有些烦恼。</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>在第一个div（也就是red span）上面添加一个值小于1的opacity属性，如下所示：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div:first-child &#123;</span><br><span class="line">  opacity: .99;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后就能看到惊讶的效果：<br><img src="/images/160709-2.jpg" alt="Alt text"><br>opacity属性居然会影响元素的堆叠顺序，这个结果令人意想不到。</p>
+<p>然后就能看到惊讶的效果：<br><img src="/images/160709-2.png" alt="Alt text"><br>opacity属性居然会影响元素的堆叠顺序，这个结果令人意想不到。</p>
 <h3 id="堆叠顺序"><a href="#堆叠顺序" class="headerlink" title="堆叠顺序"></a>堆叠顺序</h3><p>z-index表面上的规则似乎很简单，有一个更大z-index的元素会叠放在较小的z-index元素上面。但事实并非如此，这个规则只适用于一个相对的范围。</p>
 <p>在HTML文档中有一个不变的堆叠准则，任何一个元素都可以叠放在其他元素之上或者之下，决定元素叠放顺序的规则其实很清晰。</p>
 <pre><code>*当不包含z-index属性和position属性时，规则很简单，所有元素的叠放顺序与其所在HTML文档中出现的先后顺序一致。（当然使用负margin来重叠内联元素的特例除外。）
