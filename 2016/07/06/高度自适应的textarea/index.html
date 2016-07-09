@@ -85,20 +85,20 @@
 
 
 <meta name="description" content="甲骨文放弃了JavaEE。
-2016年7月6日记与
+2016年7月6日记
 Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个高度根据行数自适应的Textarea">
 <meta property="og:url" content="http://yoursite.com/2016/07/06/高度自适应的textarea/index.html">
 <meta property="og:site_name" content="Bloom's Blog">
 <meta property="og:description" content="甲骨文放弃了JavaEE。
-2016年7月6日记与
+2016年7月6日记
 Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
-<meta property="og:updated_time" content="2016-07-06T12:08:03.701Z">
+<meta property="og:updated_time" content="2016-07-09T15:12:54.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个高度根据行数自适应的Textarea">
 <meta name="twitter:description" content="甲骨文放弃了JavaEE。
-2016年7月6日记与
+2016年7月6日记
 Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：">
 
 
@@ -288,7 +288,7 @@ Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上�
 
       
         <blockquote><p>甲骨文放弃了JavaEE。</p>
-<footer><strong>2016年7月6日</strong><cite>记与</cite></footer></blockquote>
+<footer><strong>2016年7月6日</strong><cite>记</cite></footer></blockquote>
 <p>Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上网查资料找出一个自适应高度的textarea，记录下来方便以后使用。  html代码如下：<br><a id="more"></a><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea&gt;&lt;/textarea&gt;</span><br></pre></td></tr></table></figure></p>
 <p>CSS：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">textarea&#123;</span><br><span class="line">  display: block;</span><br><span class="line">  height: auto;</span><br><span class="line">  resize: none;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  line-height: 20px;</span><br><span class="line">  padding: 1px;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>重头戏JS,靠JS绑定时间监听并改动textarea高度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">// elemt: textarea元素</span></span><br><span class="line"> <span class="comment">// baserows: 基础行数</span></span><br><span class="line"> <span class="comment">// maxrows: 最大行数</span></span><br><span class="line">  <span class="keyword">var</span> adaptiveHeight = <span class="function"><span class="keyword">function</span>(<span class="params">elemt, baserows, maxrows</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/*获取textarea的padding的上下高度*/</span></span><br><span class="line">        <span class="keyword">var</span> po =  <span class="built_in">parseInt</span>(elemt.css(<span class="string">'padding-top'</span>)) + <span class="built_in">parseInt</span>(elemt.css(<span class="string">'padding-bottom'</span>));</span><br><span class="line">        <span class="keyword">var</span> baseLineHeight = <span class="built_in">parseInt</span>(elemt.css(<span class="string">'line-height'</span>));</span><br><span class="line">        <span class="keyword">var</span> baseHeight = baseLineHeight * baserows;</span><br><span class="line">        elemt.height(baseHeight);</span><br><span class="line">        <span class="keyword">var</span> scrollval = elemt[<span class="number">0</span>].scrollHeight;</span><br><span class="line">        <span class="comment">/*检测是否达到了最大行数，达到了，则把高度设置为最大高度*/</span></span><br><span class="line">        <span class="keyword">if</span> (scrollval - po &gt;= baseLineHeight * maxrows) &#123;</span><br><span class="line">            scrollval = baseHeight + baseLineHeight * (maxrows-baserows) + po;</span><br><span class="line">        &#125;</span><br><span class="line">        elemt.height(scrollval - po);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> adaptiveTextarea = <span class="function"><span class="keyword">function</span>(<span class="params">sel, baserows, maxrows, callback</span>)</span>&#123;</span><br><span class="line">        sel.bind(<span class="string">'input propertychange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            adaptiveHeight($(<span class="keyword">this</span>), baserows, maxrows);</span><br><span class="line">            <span class="keyword">if</span>(callback) callback(e);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">/*初始化textarea高度*/</span></span><br><span class="line">        adaptiveHeight(sel, baserows, maxrows);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*使用 初始行数为1， 最大行数为5*/</span></span><br><span class="line">    adaptiveTextarea($(<span class="string">'textarea'</span>), <span class="number">1</span>, <span class="number">5</span>);</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
@@ -424,7 +424,7 @@ Textarea 超出自动有滚动条这个设定实在是太操蛋了。今天上�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
